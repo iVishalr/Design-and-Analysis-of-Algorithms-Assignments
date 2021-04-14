@@ -277,7 +277,6 @@ HEAP * relax(HEAP * heap, HEAP_NODE * extracted_vertex, LIST_NODE * next_vertex,
 }
 
 void dijkstra(GRAPH * G, int destination_vertex){
-  int size = G->number_of_vertices;
   int index = 0;
   
   HEAP_NODE * stack[1023];
@@ -317,7 +316,6 @@ void print_shortest_path(HEAP_NODE ** stack,int index){
 
   for(int i=0;i<number_of_vertices-1;i++){
     printf("%d ",stack[i]->vertex);
-    int j = i;
     int nxt_vertex = stack[i]->p;
     if(nxt_vertex==0){
       printf("NO PATH\n");
