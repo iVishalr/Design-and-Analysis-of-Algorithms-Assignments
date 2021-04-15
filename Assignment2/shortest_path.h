@@ -68,6 +68,9 @@ extern "C"{
   void printGraph(GRAPH * G);
   void printHeap(HEAP * heap);
   void print_shortest_path(HEAP_NODE ** stack,int index);
+
+  void destroy_graph(GRAPH * G);
+  void destroy_heap(HEAP * heap);
 #ifdef __cplusplus
 }
 #endif

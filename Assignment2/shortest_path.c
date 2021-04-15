@@ -300,6 +300,7 @@ void dijkstra(GRAPH * G, int destination_vertex){
     }
   }
   print_shortest_path(stack,index);
+  destroy_heap(heap);
 }
 
 void print_shortest_path(HEAP_NODE ** stack,int index){
@@ -328,4 +329,45 @@ void print_shortest_path(HEAP_NODE ** stack,int index){
     }
     printf("%d\n",stack[i]->d);
   }
+}
+
+void destroy_heap(HEAP * heap){
+  if(isEmpty(heap)){
+    free(heap->Array);
+    free(heap);
+    heap->Array = NULL;
+    heap = NULL;
+    return;
+  }
+  for(int i = 0;i<heap->size;i++){
+    free(heap->Array[i]);
+    heap->Array[i] = NULL;
+  }
+  free(heap->Array);
+  free(heap);
+  heap->Array = NULL;
+  heap = NULL;
+  return;
+}
+
+void destroy_graph(GRAPH * G){
+  NODE * temp = G->graph;
+  NODE * prev = NULL;
+  while(temp!=NULL){
+    prev = temp;
+    temp = temp->next_vertex;
+    LIST_NODE * ptr = prev->connections;
+    LIST_NODE * prev_ = NULL;
+    while(ptr!=NULL){
+      prev_ = ptr;
+      ptr = ptr->next_vertex;
+      free(prev_);
+      prev_ = NULL;
+    }
+    free(prev);
+    prev = NULL;
+  }
+  free(G);
+  G = NULL;
+  return;
 }
